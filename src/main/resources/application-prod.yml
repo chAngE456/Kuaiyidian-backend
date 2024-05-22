@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    username: errandsdb
+    password: Qiong2729
+    url: jdbc:mysql://localhost:3306/errandsdb?serverTimezone=UTC&useSSL=false&useUniCode=true&characterEncoding=utf-8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+server:
+  port: 8080
+
+app:
+  uploaded-folder: /home/web/errands/image
+  base-url: file:/home/web/errands/image/
+logging:
+  file:
+    path: /home/web/errands/log

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lao.dao.BookingMapper">
+    <select id="getBookingList" resultType="Booking">
+        select * from booking;
+    </select>
+
+    <select id="getBookingListByState" resultType="Booking">
+        select * from booking where state = #{state};
+    </select>
+
+    <select id="getBookingListBySeekerId" resultType="Booking">
+        select * from booking where seekerId = #{seekerId} and state = #{state};
+    </select>
+
+    <select id="getBookingListByHelperId" resultType="Booking">
+        select * from booking where helperId = #{helperId} and state = #{state};
+    </select>
+
+    <select id="getBookingById" resultType="Booking">
+        select * from booking where bid = #{bid};
+    </select>
+
+    <select id="getScoreByUid">
+        select AVG(booking.star) from booking where helperId = #{uid};
+    </select>
+
+    <insert id="addBooking" parameterType="Booking">
+        insert into booking(bid, bName, timeInfo, placeInfo, seekerId, detail, reward, state,create_time)
+        values (#{bid},#{bName},#{timeInfo},#{placeInfo},#{seekerId},#{detail},#{reward},#{state},#{create_time});
+    </insert>
+
+    <update id="updateBooking" parameterType="Booking">
+        update booking
+        set bName = #{bName},timeInfo =#{timeInfo},placeInfo = #{placeInfo},helperId = #{helperId},
+            detail = #{detail}, reward = #{reward}, state = #{state}
+        where bid = #{bid}
+    </update>
+
+    <update id="updateBookingState">
+        update booking set state = #{state} where bid = #{bid}
+    </update>
+
+    <update id="updateBookingHelperId">
+        update booking set helperId = #{helperId} where bid = #{bid}
+    </update>
+
+    <update id="updateBookingScore">
+        update booking set star = #{star} where bid = #{bid}
+    </update>
+
+    <update id="updateOneValue">
+        update booking set #{name} = #{value} where bid = #{bid}
+    </update>
+
+    <delete id="deleteBooking">
+        delete from booking where bid = #{bid}
+    </delete>
+</mapper>
